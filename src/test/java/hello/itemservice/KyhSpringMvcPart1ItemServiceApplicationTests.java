@@ -19,7 +19,6 @@ class KyhSpringMvcPart1ItemServiceApplicationTests {
 
     @Test
     void save(){
-        as
     }
 
 }
