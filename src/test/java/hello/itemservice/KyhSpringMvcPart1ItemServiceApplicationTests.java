@@ -8,17 +8,4 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class KyhSpringMvcPart1ItemServiceApplicationTests {
 
-
-    ItemRepository itemRepository = new ItemRepository();
-
-    @AfterEach
-    void clearStore() {
-        itemRepository.clearStore();
-    }
-
-
-    @Test
-    void save(){
-    }
-
 }
