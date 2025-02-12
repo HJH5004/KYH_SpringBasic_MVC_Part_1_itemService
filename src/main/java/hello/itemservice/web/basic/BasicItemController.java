@@ -104,7 +104,7 @@ public class BasicItemController {
     public String saveV6(Item item, RedirectAttributes redirectAttributes) {
 
         itemRepository.save(item);
-
+        //ㄴ
         redirectAttributes.addAttribute("itemId", item.getId());
         redirectAttributes.addAttribute("status", true);
 
