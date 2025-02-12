@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -79,12 +80,52 @@ public class BasicItemController {
         return "basic/item";
     }
 
-    @PostMapping("/add")
+    //ModelAttribute가 없이 쓰기도 하지만 그리 권장하진 않음
+//    @PostMapping("/add")
     public String saveV4(Item item) {
 
         itemRepository.save(item);
 
+        //바로 뷰 템플릿을 호출하는 형태
         return "basic/item";
+    }
+
+    //ModelAttribute가 없이 쓰기도 하지만 그리 권장하진 않음
+//    @PostMapping("/add")
+    public String saveV5(Item item) {
+
+        itemRepository.save(item);
+
+        return "redirect:/basic/items/"+item.getId();
+    }
+
+    //ModelAttribute가 없이 쓰기도 하지만 그리 권장하진 않음
+    @PostMapping("/add")
+    public String saveV6(Item item, RedirectAttributes redirectAttributes) {
+
+        itemRepository.save(item);
+
+        redirectAttributes.addAttribute("itemId", item.getId());
+        redirectAttributes.addAttribute("status", true);
+
+        return "redirect:/basic/items/{itemId}";
+    }
+
+    @GetMapping("/{itemId}/edit")
+    public String editForm(@PathVariable("itemId") Long itemId, Model model) {
+
+        Item byId = itemRepository.findById(itemId);
+        model.addAttribute("item", byId);
+
+        return "basic/editForm";
+    }
+
+    @PostMapping("/{itemId}/edit")
+    public String edit(@PathVariable("itemId") Long itemId, @ModelAttribute Item item) {
+        itemRepository.update(itemId, item);
+
+        //@PathVariable의 값은 리다이렉트에서도 된다.
+        return "redirect:/basic/items/{itemId}";
     }
 
     @PostConstruct
