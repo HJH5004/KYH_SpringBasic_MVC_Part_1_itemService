@@ -32,7 +32,7 @@ public class ItemRepository {
         findItem.setId(id);
         findItem.setItemName(updateParam.getItemName());
         findItem.setPrice(updateParam.getPrice());
-        findItem.setQuantity(updateParam.getQuantity());
+        findItem.setInteger(updateParam.getInteger());
 
         store.put(id, findItem);
 

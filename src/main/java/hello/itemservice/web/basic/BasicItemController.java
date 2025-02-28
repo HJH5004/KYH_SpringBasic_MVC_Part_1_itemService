@@ -50,7 +50,7 @@ public class BasicItemController {
         Item item = new Item();
         item.setItemName(itemName);
         item.setPrice(price);
-        item.setQuantity(quantity);
+        item.setInteger(quantity);
 
         itemRepository.save(item);
         model.addAttribute("item", item);
