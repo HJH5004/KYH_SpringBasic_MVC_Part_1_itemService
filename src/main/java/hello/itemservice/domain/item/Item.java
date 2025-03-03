@@ -10,6 +10,7 @@ public class Item {
     private Integer price;
     private Integer integer;
     private Integer pk;
+    private Integer quantity;
 
     public Item() {
     }
